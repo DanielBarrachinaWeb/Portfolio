@@ -21,7 +21,7 @@
             line-height: 1.6;
         }
 
-        /* Navegación Responsiva y Accesible */
+        /* Navegación Fija por defecto (Escritorio) */
         nav {
             position: fixed;
             top: 0;
@@ -109,8 +109,12 @@
             opacity: 1;
         }
 
-        /* Optimización móvil para pantallas estrechas */
+        /* Optimización móvil para pantallas estrechas: NAV NO FIJO */
         @media (max-width: 650px) {
+            nav {
+                position: relative; /* El menú deja de estar fijo y fluye con el scroll */
+            }
+
             .nav-container {
                 flex-direction: column;
                 gap: 10px;
@@ -118,13 +122,13 @@
             }
 
             .nav-links {
-                flex-direction: column; /* Apila los enlaces verticalmente de forma ordenada */
+                flex-direction: column; /* Apila los enlaces verticalmente */
                 width: 100%;
                 gap: 6px;
             }
 
             nav a {
-                width: 100%; /* Cada botón ocupa todo el ancho disponible */
+                width: 100%;
                 box-sizing: border-box;
                 padding: 12px 14px;
                 font-size: 0.85rem;
@@ -138,13 +142,13 @@
             }
 
             .lang-btn {
-                flex: 1; /* Los botones ES/EN se reparten el ancho por igual */
+                flex: 1;
                 max-width: 100px;
                 min-height: 40px;
             }
         }
 
-        /* Contenedor principal (el margen superior se calcula dinámicamente con JS) */
+        /* Contenedor principal */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -216,13 +220,12 @@
 
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            padding-bottom: 56.25%; /* Relación 16:9 */
             height: 0;
             overflow: hidden;
             background-color: #000;
         }
 
-        /* Ajuste específico para LinkedIn */
         .video-container.linkedin {
             padding-bottom: 100%; 
         }
@@ -236,7 +239,6 @@
             border: 0;
         }
 
-        /* Miniatura y Botón de Play para YouTube */
         .video-thumbnail {
             position: absolute;
             top: 0;
@@ -289,7 +291,7 @@
 </head>
 <body>
 
-    <!-- Menú de navegación estructurado -->
+    <!-- Menú de navegación -->
     <nav id="navbar">
         <div class="nav-container">
             <div class="nav-links">
@@ -318,7 +320,6 @@
         <section id="gft" class="portfolio-section">
             <h2 class="section-title" data-i18n="gftTitle">Projects: GFT</h2>
             <div class="video-grid">
-                <!-- 1. YouTube: Así fue el evento "Más allá de ChatGPT" -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="GVkQs7GK1sI">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/GVkQs7GK1sI/hqdefault.jpg');">
@@ -327,7 +328,6 @@
                     </div>
                 </div>
 
-                <!-- 2. YouTube: La Inteligencia Artificial (IA) protagonista -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="ssf6Z8sICgM">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/ssf6Z8sICgM/hqdefault.jpg');">
@@ -336,7 +336,6 @@
                     </div>
                 </div>
 
-                <!-- 3. YouTube: Así fue el III Foro de la Mujer -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="2m6BeBmM7B0">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/2m6BeBmM7B0/hqdefault.jpg');">
@@ -345,35 +344,30 @@
                     </div>
                 </div>
 
-                <!-- 4. LinkedIn: GFT España es una de las 5 mejores empresas -->
                 <div class="video-card">
                     <div class="video-container linkedin">
                         <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7183049153491394560" allowfullscreen title="LinkedIn Post: GFT España"></iframe>
                     </div>
                 </div>
 
-                <!-- 5. LinkedIn: Revolution Banking -->
                 <div class="video-card">
                     <div class="video-container linkedin">
                         <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7194254167601774592" allowfullscreen title="LinkedIn Post: Revolution Banking"></iframe>
                     </div>
                 </div>
 
-                <!-- 6. LinkedIn: Descubre cómo la combinación con IA -->
                 <div class="video-card">
                     <div class="video-container linkedin">
                         <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7186278004124241920" allowfullscreen title="LinkedIn Post: AI Combination"></iframe>
                     </div>
                 </div>
 
-                <!-- 7. LinkedIn: Aliado LGTBI -->
                 <div class="video-card">
                     <div class="video-container linkedin">
                         <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7212362735693549570" allowfullscreen title="LinkedIn Post: LGTBI Ally"></iframe>
                     </div>
                 </div>
 
-                <!-- 8. LinkedIn: Fiestas de Navidad -->
                 <div class="video-card">
                     <div class="video-container linkedin">
                         <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7143881604719968256" allowfullscreen title="LinkedIn Post: Christmas Party"></iframe>
@@ -386,7 +380,6 @@
         <section id="ceac" class="portfolio-section">
             <h2 class="section-title" data-i18n="ceacTitle">Projects: CEAC (Some videos only available on YouTube)</h2>
             <div class="video-grid">
-                <!-- 1. CEAC Talent Programme: Dennis Pietak -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="hbsue7yUCTk">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/hbsue7yUCTk/hqdefault.jpg');">
@@ -395,7 +388,6 @@
                     </div>
                 </div>
 
-                <!-- 2. CEAC Talent Programme: Katharina Schwerin -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="vy9uT2ECSIE">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/vy9uT2ECSIE/hqdefault.jpg');">
@@ -404,7 +396,6 @@
                     </div>
                 </div>
 
-                <!-- 3. CEAC Talent Programme: Lukas Zumbusch -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="PuyDOPtoncc">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/PuyDOPtoncc/hqdefault.jpg');">
@@ -413,7 +404,6 @@
                     </div>
                 </div>
 
-                <!-- 4. Wirtschaft und Politik Ostasiens -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="e3eZXyb1dgA">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/e3eZXyb1dgA/hqdefault.jpg');">
@@ -422,7 +412,6 @@
                     </div>
                 </div>
 
-                <!-- 5. CEAC Purpose -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="ysp-KBoe-TA">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/ysp-KBoe-TA/hqdefault.jpg');">
@@ -431,7 +420,6 @@
                     </div>
                 </div>
 
-                <!-- 6. CEAC Talent Programme: Frieder Kuhn -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="vFD5toq51EM">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/vFD5toq51EM/hqdefault.jpg');">
@@ -440,7 +428,6 @@
                     </div>
                 </div>
 
-                <!-- 7. CEAC Talent Programme: Arne Moritz Meyer -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="Pb4tjB4FOqE">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/Pb4tjB4FOqE/hqdefault.jpg');">
@@ -449,7 +436,6 @@
                     </div>
                 </div>
 
-                <!-- 8. CEAC Background -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="CzefXcXMzME">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/CzefXcXMzME/hqdefault.jpg');">
@@ -458,7 +444,6 @@
                     </div>
                 </div>
 
-                <!-- 9. CEAC Team -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="bcYFdA5n-sY">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/bcYFdA5n-sY/hqdefault.jpg');">
@@ -467,7 +452,6 @@
                     </div>
                 </div>
 
-                <!-- 10. CEAC Research -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="zQrDhT6vzRE">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/zQrDhT6vzRE/hqdefault.jpg');">
@@ -476,7 +460,6 @@
                     </div>
                 </div>
 
-                <!-- 11. CEAC Teaching -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="YtoKs_kbcSs">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/YtoKs_kbcSs/hqdefault.jpg');">
@@ -485,7 +468,6 @@
                     </div>
                 </div>
 
-                <!-- 12. CEAC Network -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="q-pVci9wRhI">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/q-pVci9wRhI/hqdefault.jpg');">
@@ -494,7 +476,6 @@
                     </div>
                 </div>
 
-                <!-- 13. Faculty of East Asian Studies -->
                 <div class="video-card">
                     <div class="video-container" data-youtube-id="iT_hdOoEFwo">
                         <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/iT_hdOoEFwo/hqdefault.jpg');">
@@ -512,7 +493,6 @@
 
     <!-- Scripts de interactividad y dinamismo (JS) -->
     <script>
-        // Diccionario de traducciones (Español / Inglés)
         const translations = {
             es: {
                 navAbout: "Sobre mí",
@@ -538,25 +518,29 @@
 
         let currentLang = 'en';
 
-        // Ajuste dinámico exacto del espacio superior para evitar solapamientos en cualquier móvil
+        // Ajusta el padding superior solo si la navegación es fija (escritorio)
         function adjustPadding() {
             const nav = document.getElementById('navbar');
             const container = document.getElementById('main-container');
             if (nav && container) {
-                const navHeight = nav.offsetHeight;
-                container.style.paddingTop = (navHeight + 20) + 'px';
+                const navStyle = window.getComputedStyle(nav);
+                if (navStyle.position === 'fixed') {
+                    const navHeight = nav.offsetHeight;
+                    container.style.paddingTop = (navHeight + 20) + 'px';
+                } else {
+                    // Si el nav es relativo (móvil), no necesita padding adicional
+                    container.style.paddingTop = '20px';
+                }
             }
         }
 
         window.addEventListener('load', adjustPadding);
         window.addEventListener('resize', adjustPadding);
 
-        // Función para cambiar de idioma de forma directa
         function setLanguage(lang) {
             currentLang = lang;
             document.documentElement.lang = currentLang;
 
-            // Actualiza los elementos HTML con el atributo data-i18n
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[currentLang][key]) {
@@ -564,43 +548,46 @@
                 }
             });
 
-            // Actualiza el estado visual del botón activo
             document.getElementById('btn-es').classList.toggle('active', currentLang === 'es');
             document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
 
-            // Recalcula el margen tras el cambio de texto
             setTimeout(adjustPadding, 50);
         }
 
-        // Efecto para oscurecer la barra de navegación al hacer scroll
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(10, 10, 10, 0.98)';
-                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.5)';
-            } else {
-                nav.style.background = 'rgba(18, 18, 18, 0.95)';
-                nav.style.boxShadow = 'none';
+            const navStyle = window.getComputedStyle(nav);
+            if (navStyle.position === 'fixed') {
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(10, 10, 10, 0.98)';
+                    nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.5)';
+                } else {
+                    nav.style.background = 'rgba(18, 18, 18, 0.95)';
+                    nav.style.boxShadow = 'none';
+                }
             }
         });
 
-        // Navegación suave (Smooth scroll) para los enlaces del menú
+        // Navegación suave con scroll adaptado al tipo de posición (fijo vs no fijo)
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    const navHeight = document.getElementById('navbar').offsetHeight;
+                const nav = document.getElementById('navbar');
+                if (targetElement && nav) {
+                    const isFixed = window.getComputedStyle(nav).position === 'fixed';
+                    const offset = isFixed ? nav.offsetHeight + 10 : 10;
+                    
                     window.scrollTo({
-                        top: targetElement.offsetTop - navHeight - 10,
+                        top: targetElement.offsetTop - offset,
                         behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Carga dinámica de los vídeos de YouTube al hacer clic o presionar Enter/Espacio en la miniatura
+        // Carga dinámica de vídeos de YouTube
         document.querySelectorAll('.video-container[data-youtube-id]').forEach(container => {
             const loadVideo = () => {
                 const videoId = container.getAttribute('data-youtube-id');
