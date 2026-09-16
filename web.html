@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Barrachina Portfolio</title>
+    <style>
+        /* Estilos Globales (CSS) */
+        :root {
+            --bg-color: #121212;
+            --text-color: #f5f5f5;
+            --accent-color: #0073b1; /* Azul corporativo */
+            --card-bg: #1e1e1e;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navegación Fija por defecto (Escritorio) */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: background 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Enlaces del menú */
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-size: 0.95rem;
+            padding: 10px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: inline-block;
+            text-align: center;
+        }
+
+        nav a:hover, nav a:focus {
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.08);
+            outline: none;
+        }
+
+        /* Selector de idioma */
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--accent-color);
+            padding: 8px 18px;
+            min-height: 44px;
+            min-width: 48px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lang-btn:hover, .lang-btn:focus {
+            opacity: 1;
+            background-color: rgba(0, 115, 177, 0.2);
+        }
+
+        .lang-btn.active {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            opacity: 1;
+        }
+
+        /* Optimización móvil para pantallas estrechas: NAV NO FIJO */
+        @media (max-width: 650px) {
+            nav {
+                position: relative; /* El menú deja de estar fijo y fluye con el scroll */
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+                padding: 12px;
+            }
+
+            .nav-links {
+                flex-direction: column; /* Apila los enlaces verticalmente */
+                width: 100%;
+                gap: 6px;
+            }
+
+            nav a {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 12px 14px;
+                font-size: 0.85rem;
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .lang-switch {
+                justify-content: center;
+                width: 100%;
+                margin-top: 4px;
+            }
+
+            .lang-btn {
+                flex: 1;
+                max-width: 100px;
+                min-height: 40px;
+            }
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 40px;
+        }
+
+        /* Sección Personal */
+        .about-section {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+        }
+
+        .about-section h1 {
+            margin-top: 0;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .about-section h2 {
+            color: var(--accent-color);
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .about-section p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1em;
+            color: #cccccc;
+        }
+
+        /* Secciones de Portfolio */
+        .portfolio-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: inline-block;
+            font-size: 1.4em;
+        }
+
+        /* Cuadrícula de Vídeos */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Relación 16:9 */
+            height: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .video-container.linkedin {
+            padding-bottom: 100%; 
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-button {
+            width: 68px;
+            height: 48px;
+            background-color: rgba(33, 33, 33, 0.85);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .video-thumbnail:hover .play-button {
+            background-color: #ff0000;
+            transform: scale(1.1);
+        }
+
+        .play-button::before {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent #ffffff;
+            margin-left: 3px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #0a0a0a;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú de navegación -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#sobre-mi" data-i18n="navAbout">About Me</a>
+                <a href="#gft" data-i18n="navGft">Projects: GFT</a>
+                <a href="#ceac" data-i18n="navCeac">Projects: CEAC</a>
+            </div>
+            <div class="lang-switch">
+                <button id="btn-es" class="lang-btn" onclick="setLanguage('es')">ES</button>
+                <button id="btn-en" class="lang-btn active" onclick="setLanguage('en')">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" id="main-container">
+        <!-- Sección 1: Personal -->
+        <section id="sobre-mi" class="about-section">
+            <h1>Daniel Barrachina</h1>
+            <h2 data-i18n="heroSubtitle">Video Editor, Marketing Assistant, and University Student</h2>
+            <p data-i18n="heroText">
+                I am 23 years old and based in Valencia, Spain. Currently, I combine my higher education studies in nutrition with my career as a video editor, a field that has led me to participate in national and international projects in countries such as Germany. Over the years, I have had the opportunity to take part in various corporate productions, bringing my aesthetic vision and commitment. Below, I present a selection of videos I have worked on. In the first section, I edited videos for the multinational company GFT for both YouTube and LinkedIn. In the second section, I edited videos for the Centre for EU-Asia Connectivity (CEAC), a Jean Monnet Centre of Excellence dedicated to researching and fostering strategic relations and connectivity between Europe and Asia. With them, I had the opportunity to work on YouTube content.
+            </p>
+        </section>
+
+        <!-- Sección 2: GFT -->
+        <section id="gft" class="portfolio-section">
+            <h2 class="section-title" data-i18n="gftTitle">Projects: GFT</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="GVkQs7GK1sI">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/GVkQs7GK1sI/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="ssf6Z8sICgM">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/ssf6Z8sICgM/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="2m6BeBmM7B0">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/2m6BeBmM7B0/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container linkedin">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7183049153491394560" allowfullscreen title="LinkedIn Post: GFT España"></iframe>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container linkedin">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7194254167601774592" allowfullscreen title="LinkedIn Post: Revolution Banking"></iframe>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container linkedin">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7186278004124241920" allowfullscreen title="LinkedIn Post: AI Combination"></iframe>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container linkedin">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7212362735693549570" allowfullscreen title="LinkedIn Post: LGTBI Ally"></iframe>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container linkedin">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7143881604719968256" allowfullscreen title="LinkedIn Post: Christmas Party"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 3: CEAC -->
+        <section id="ceac" class="portfolio-section">
+            <h2 class="section-title" data-i18n="ceacTitle">Projects: CEAC (Some videos only available on YouTube)</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="hbsue7yUCTk">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/hbsue7yUCTk/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="vy9uT2ECSIE">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/vy9uT2ECSIE/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="PuyDOPtoncc">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/PuyDOPtoncc/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="e3eZXyb1dgA">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/e3eZXyb1dgA/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="ysp-KBoe-TA">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/ysp-KBoe-TA/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="vFD5toq51EM">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/vFD5toq51EM/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="Pb4tjB4FOqE">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/Pb4tjB4FOqE/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="CzefXcXMzME">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/CzefXcXMzME/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="bcYFdA5n-sY">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/bcYFdA5n-sY/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="zQrDhT6vzRE">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/zQrDhT6vzRE/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="YtoKs_kbcSs">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/YtoKs_kbcSs/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="q-pVci9wRhI">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/q-pVci9wRhI/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container" data-youtube-id="iT_hdOoEFwo">
+                        <div class="video-thumbnail" role="button" tabindex="0" aria-label="Play video" style="background-image: url('https://img.youtube.com/vi/iT_hdOoEFwo/hqdefault.jpg');">
+                            <div class="play-button"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p data-i18n="footerText">&copy; 2026 Daniel Barrachina. Corporate Portfolio.</p>
+    </footer>
+
+    <!-- Scripts de interactividad y dinamismo (JS) -->
+    <script>
+        const translations = {
+            es: {
+                navAbout: "Sobre mí",
+                navGft: "Proyectos: GFT",
+                navCeac: "Proyectos: CEAC",
+                heroSubtitle: "Editor de vídeo, asistente de Marketing y estudiante universitario",
+                heroText: "Tengo 23 años y resido en Valencia, España. Actualmente compagino mis estudios superiores en nutrición con mi trayectoria como editor de vídeos, una faceta que me ha llevado a participar en proyectos nacionales e internacionales en países como Alemania. A lo largo de estos años, he tenido la oportunidad de formar parte de diversas producciones corporativas, aportando mi visión estética y compromiso. A continuación, presento una selección de diversos vídeos en los que he trabajado. En el primer apartado edité vídeos para la multinacional tecnológica GFT, tanto para YouTube como para LinkedIn. En el segundo apartado edité vídeos para el Centre for EU-Asia Connectivity (CEAC), un Centro de Excelencia Jean Monnet dedicado a investigar e impulsar las relaciones y la conectividad estratégica entre Europa y Asia. Con ellos tuve la oportunidad de trabajar en contenidos para YouTube.",
+                gftTitle: "Proyectos: GFT",
+                ceacTitle: "Proyectos: CEAC (Algunos vídeos solo disponibles en YouTube)",
+                footerText: "© 2026 Daniel Barrachina. Portfolio Corporativo."
+            },
+            en: {
+                navAbout: "About Me",
+                navGft: "Projects: GFT",
+                navCeac: "Projects: CEAC",
+                heroSubtitle: "Video Editor, Marketing Assistant, and University Student",heroText: "I am 23 years old and based in Valencia, Spain. Currently, I combine my higher education studies in nutrition with my career as a video editor, a field that has led me to participate in national and international projects in countries such as Germany. Over the years, I have had the opportunity to take part in various corporate productions, bringing my aesthetic vision and commitment. Below, I present a selection of videos I have worked on. In the first section, I edited videos for the multinational company GFT for both YouTube and LinkedIn. In the second section, I edited videos for the Centre for EU-Asia Connectivity (CEAC), a Jean Monnet Centre of Excellence dedicated to researching and fostering strategic relations and connectivity between Europe and Asia. With them, I had the opportunity to work on YouTube content.",
+                
+                gftTitle: "Projects: GFT",
+                ceacTitle: "Projects: CEAC (Some videos only available on YouTube)",
+                footerText: "© 2026 Daniel Barrachina. Corporate Portfolio."
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Ajusta el padding superior solo si la navegación es fija (escritorio)
+        function adjustPadding() {
+            const nav = document.getElementById('navbar');
+            const container = document.getElementById('main-container');
+            if (nav && container) {
+                const navStyle = window.getComputedStyle(nav);
+                if (navStyle.position === 'fixed') {
+                    const navHeight = nav.offsetHeight;
+                    container.style.paddingTop = (navHeight + 20) + 'px';
+                } else {
+                    // Si el nav es relativo (móvil), no necesita padding adicional
+                    container.style.paddingTop = '20px';
+                }
+            }
+        }
+
+        window.addEventListener('load', adjustPadding);
+        window.addEventListener('resize', adjustPadding);
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = currentLang;
+
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    element.innerHTML = translations[currentLang][key];
+                }
+            });
+
+            document.getElementById('btn-es').classList.toggle('active', currentLang === 'es');
+            document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
+
+            setTimeout(adjustPadding, 50);
+        }
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            const navStyle = window.getComputedStyle(nav);
+            if (navStyle.position === 'fixed') {
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(10, 10, 10, 0.98)';
+                    nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.5)';
+                } else {
+                    nav.style.background = 'rgba(18, 18, 18, 0.95)';
+                    nav.style.boxShadow = 'none';
+                }
+            }
+        });
+
+        // Navegación suave con scroll adaptado al tipo de posición (fijo vs no fijo)
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                const nav = document.getElementById('navbar');
+                if (targetElement && nav) {
+                    const isFixed = window.getComputedStyle(nav).position === 'fixed';
+                    const offset = isFixed ? nav.offsetHeight + 10 : 10;
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - offset,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Carga dinámica de vídeos de YouTube
+        document.querySelectorAll('.video-container[data-youtube-id]').forEach(container => {
+            const loadVideo = () => {
+                const videoId = container.getAttribute('data-youtube-id');
+                container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="YouTube Video Player"></iframe>`;
+            };
+
+            container.addEventListener('click', loadVideo);
+            container.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    loadVideo();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
